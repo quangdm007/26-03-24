@@ -56,7 +56,7 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
-
+# cau hinh 2 loai mang : public va private
 networks:
   backup.dhthainguyen.edu.vn:
     driver: bridge
