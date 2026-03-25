@@ -13,7 +13,10 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
-
+      - name: Copy .env file
+        run: |
+          cp /opt/aum_web/training/26_03_24/headless_wrapper/.env \
+             $GITHUB_WORKSPACE/headless_wrapper/.env
       - name: Deploy
         run: |
           cd headless_wrapper
