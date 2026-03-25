@@ -12,8 +12,8 @@ RUN npm run build
 # Stage 2: Run 
 FROM node:18-alpine
 
-RUN addgroup -S -g 1000 appgroup && \
-    adduser -S -u 1000 -G appgroup appuser
+RUN addgroup -S -g 1001 appgroup && \
+    adduser -S -u 1001 -G appgroup appuser
 
 WORKDIR /app
 
