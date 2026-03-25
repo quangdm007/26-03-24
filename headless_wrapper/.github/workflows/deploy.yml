@@ -1,0 +1,32 @@
+name: Deploy Docker Compose
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /opt/workspace   # sửa thành path project của bạn
+
+            echo "Pull latest code"
+            git pull origin main
+
+            echo "Stop old containers"
+            docker compose down
+
+            echo "Build & start containers"
+            docker compose up -d --build
+
+            echo "Remove unused images"
+            docker image prune -f
